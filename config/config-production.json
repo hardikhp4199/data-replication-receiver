@@ -1,0 +1,38 @@
+{
+    "LogLevel" : "debug",
+    "SSLExpireCheckInterval" : "*/5 * * * *",
+    "HttpServer": {
+        "Port": 8000,
+        "SSL" : {
+            "certFile" : "./cert/server.crt",
+            "keyFile" : "./cert/server.key"
+        },
+        "Authorization": {
+            "username" : "admin",
+            "password" : "admin"
+        }
+    },
+    
+    "APIEndpoints":{
+        "Get":"/document/get",
+        "Upsert":"/document/upsert",
+        "Remove":"/document/remove",
+        "Exists":"/document/exists",
+        "Healthcheck":"/healthcheck",
+        "NullDataDocumentEndpoint":"/document/nullDataDocument",
+        "CBtoCBconfigration":"/getcbtocbconfiguration"
+    },
+    
+    "Couchbase": {
+        "Host": "192.168.26.51",
+        "Username": "administrator",
+        "Password": "dev@2021",
+        "BucketName":"CB_DEMO",
+        "DbRetryCount": 10,
+        "CBConfigDocKey" : "CBTOCB_CONFIG",
+        "CBConfigBucket" : "sink_sender_config",
+        "NullDocBucketName":"minio_test",
+        "RetriveTimeoutSecond" : 0
+
+    }
+}

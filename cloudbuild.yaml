@@ -1,0 +1,11 @@
+steps:
+  - id: Build Image
+    name: "gcr.io/cloud-builders/docker"
+    args: ["build", "-t", "gcr.io/infra-337510/tools/datareplication/cbreceiver", "."]
+
+images:
+    - "gcr.io/infra-337510/tools/datareplication/cbreceiver"   
+  # - id: "Push Image"
+  #   name: "gcr.io/cloud-builders/docker"
+  #   args: ["push", "gcr.io/infra-337510/tools/datareplication/cbreceiver"]
+timeout: 2000s
