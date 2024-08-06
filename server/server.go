@@ -16,6 +16,7 @@ var (
 	keyFile      = config.GetString("HttpServer.SSL.keyFile")
 	usernameAuth = config.GetString("HttpServer.Authorization.username")
 	passwordAuth = config.GetString("HttpServer.Authorization.password")
+	tls          = config.GetBool("HttpServer.Authorization.password")
 )
 
 // connect to server
@@ -32,8 +33,16 @@ func StartServerApp() {
 
 	// initial server and authenticate
 	httpPort := ":" + strconv.Itoa(port)
-	err_conn := http.ListenAndServeTLS(httpPort, certFile, keyFile, s)
-	if err_conn != nil {
-		logging.DoLoggingLevelBasedLogs(logging.Error, "", logging.EnrichErrorWithStackTrace(err_conn))
+	if tls {
+		err_conn := http.ListenAndServeTLS(httpPort, certFile, keyFile, s)
+		if err_conn != nil {
+			logging.DoLoggingLevelBasedLogs(logging.Error, "", logging.EnrichErrorWithStackTrace(err_conn))
+		}
+	} else {
+		err_conn := http.ListenAndServe(httpPort, s)
+		if err_conn != nil {
+			logging.DoLoggingLevelBasedLogs(logging.Error, "", logging.EnrichErrorWithStackTrace(err_conn))
+		}
 	}
+
 }
